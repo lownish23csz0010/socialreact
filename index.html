@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="SocialReact: Group-Aware Listener Reaction Generation for Multi-Party Conversations">
+  <meta name="keywords" content="Conversational Modeling, Generative AI, Group Dynamics, Facial Motion, Human Behaviour>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SocialReact: Group-Aware Listener Reaction Generation for Multi-Party Conversations</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+<!-- <nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+      <a class="navbar-item" href="https://keunhong.com">
+      <span class="icon">
+          <i class="fas fa-home"></i>
+      </span>
+      </a>
+
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://hypernerf.github.io">
+            HyperNeRF
+          </a>
+          <a class="navbar-item" href="https://nerfies.github.io">
+            Nerfies
+          </a>
+          <a class="navbar-item" href="https://latentfusion.github.io">
+            LatentFusion
+          </a>
+          <a class="navbar-item" href="https://photoshape.github.io">
+            PhotoShape
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav> -->
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">SocialReact: Group-Aware Listener Reaction Generation for Multi-Party Conversations</h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="#">Lownish Rai Sookha</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="#">Pawan Kumar</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="#">M. A. Ganaie</a><sup>1</sup>,
+            </span>
+            <span class="author-block">
+              <a href="#">Abhinav Dhall</a><sup>2</sup>
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>Indian Institute of Technology Ropar, </span>
+            <span class="author-block"><sup>2</sup>Monash University</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <!-- <span class="link-block">
+                <a href="https://arxiv.org/abs/2011.12948"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span> -->
+              <!-- Video Link. -->
+              <!-- <span class="link-block">
+                <a href="https://www.youtube.com/watch?v=MrKrnHhk8IA"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="#"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <!-- <span class="link-block">
+                <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a> -->
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+<!-- <section class="hero is-light is-small">
+  <div class="hero-body">
+    <div class="container">
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-steve">
+          <video poster="" id="steve" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/steve.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-chair-tp">
+          <video poster="" id="chair-tp" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/chair-tp.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-shiba">
+          <video poster="" id="shiba" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/shiba.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-fullbody">
+          <video poster="" id="fullbody" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/fullbody.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-blueshirt">
+          <video poster="" id="blueshirt" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/blueshirt.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-mask">
+          <video poster="" id="mask" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/mask.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-coffee">
+          <video poster="" id="coffee" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/coffee.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+        <div class="item item-toby">
+          <video poster="" id="toby" autoplay controls muted loop playsinline height="100%">
+            <source src="./static/videos/toby2.mp4"
+                    type="video/mp4">
+          </video>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Human face-to-face communication in small groups is shaped by subtle visual responses such as nods, smiles and micro-expressions, that signal understanding and engagement. While prior works on listener facial reaction generation has largely focused on dyadic interactions, real-world conversations often involve multiple participants whose responses are inter-dependent. In this work, we propose SocialReact, a multi-modal framework for group-aware facial reaction generation in a multi-party setting comprising one speaker, two contextual listener and one target listener. A Finite Scalar Quantization (FSQ)-based motion tokenizer discretizes 3D facial motion representation into a compact and expressive latent space. We model interper-sonal influence using a Spatio-Temporal Graph Neural Network (ST-GNN) with directed Graph Attention layers, enabling the target listener's reaction to be conditioned on both the speaker and the contextual listeners. A cross-modal Transformer integrates long-range prosodic and visual cues into a unified speaker context. An auto-regressive GRU-based temporal decoder generates temporally coherent, contextually appropriate facial expressions. By explicitly modeling group dynamics, our approach moves beyond dyadic paradigms and contributes towards a more socially aware intelligent system for applications in tele-presence, virtual agents and human-robot interaction.
+          </p>
+
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <!-- <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
+                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+      </div>
+    </div> -->
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Approach</h2>
+        <div class="columns is-vcentered interpolation-panel">
+          <!-- <div class="column is-3 has-text-centered">
+            <img src="./static/images/interpolate_start.jpg"
+                 class="interpolation-image"
+                 alt="Interpolate start reference image."/>
+            <p>Start Frame</p>
+          </div> -->
+          <!-- <div class="column interpolation-video-column">
+            <div id="interpolation-image-wrapper">
+              Loading...
+            </div>
+            <input class="slider is-fullwidth is-large is-info"
+                   id="interpolation-slider"
+                   step="1" min="0" max="100" value="0" type="range">
+          </div> -->
+          <section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body has-text-centered">
+      <img src="./static/images/SocialReact.png"
+           alt="Architecture Image"
+           class="interpolation-image"
+           style="max-width: 100%; height: auto;" />
+      <h2 class="subtitle has-text-centered">
+        <!-- <p >Overall Architecture of AURA </p> -->
+      </h2>
+    </div>
+  </div>
+</section>
+        </div>
+
+        <div class="content has-text-justified">
+          <p>
+            Our framework consists of three main components:
+          </p>
+          
+          <ol>
+            <li> <b>Motion Tokenizer</b> - We first encode continuous facial motion into a compact discrete representation using a Finite Scalar Quantization (FSQ)-based motion tokenizer. A CNN-ResNet encoder downsamples the input motion sequence before quantization, while a decoder reconstructs the original facial dynamics from the discrete tokens. This compact representation preserves expressive facial behaviors while reducing the complexity of the generation task.
+          
+
+          
+            <li> <b>Speaker Context Encoding</b> - Given the speaker’s audio and facial motion, we extract acoustic representations using a pre-trained audio encoder and combine them with visual features through a cross-modal Transformer. The resulting representation captures complementary speech and facial cues, providing a unified description of the speaker’s behavior.
+          </ol>
+
+          <ol>
+            <li><b>Group-Aware Reaction Generation</b> - The fused speaker representation, together with the contextual listener’s facial motion, is processed by a Spatio-Temporal Graph Neural Network (ST-GNN). The graph explicitly models speaker-listener and listener-listener interactions, while a recurrent decoder generates temporally coherent facial motion for the target listener, producing socially appropriate reactions that evolve with the conversational context.</li>
+          </ol>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Results</h2>
+      </div>
+    </div>
+    <!--/ Matting. -->
+
+    <!-- Animation. -->
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+
+        <h3 class="title is-4">Example 1</h3>
+
+        <div class="content has-text-centered">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/_vVIBiBLkq8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+
+      </div>
+  </div> 
+
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+
+        <h3 class="title is-4">Example 2</h3>
+
+        <div class="content has-text-centered">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/EncBbt3ruB0" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+
+      </div>
+  </div> 
+
+  <div class="columns is-centered">
+      <div class="column is-full-width">
+
+        <h3 class="title is-4">Example 3</h3>
+
+        <div class="content has-text-centered">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/Eo0vonjzq-Q" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+
+      </div>
+  </div> 
+
+  <div class="columns is-centered">
+      <div class="column is-full-width">
+
+        <h3 class="title is-4">Example 4</h3>
+
+        <div class="content has-text-centered">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/LYzWFbTVd7k" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+
+      </div>
+  </div> 
+
+  <div class="columns is-centered">
+      <div class="column is-full-width">
+
+        <h3 class="title is-4">Example 5</h3>
+
+        <div class="content has-text-centered">
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/jw-hL7vuagA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+
+      </div>
+  </div> 
+    <!--/ Animation. -->
+
+
+  </div>
+</section>
+
+
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{TBA}</code></pre>
+  </div>
+</section>
+
+
+<footer class="footer">
+  <div class="container">
+    <!-- <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div> -->
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            Template adapted from <a rel="repo"
+                                                href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
